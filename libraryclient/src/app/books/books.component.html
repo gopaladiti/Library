@@ -1,0 +1,10 @@
+<div [hidden]="isBooksPresent">
+  <button class="btn btn-primary get-button" (click)="getAllBooks()">Browse Books</button>
+</div>
+<div class="booklist">
+  <ol>
+    <li *ngFor="let book of books">
+      {{ book }}
+    </li>
+  </ol>
+</div>

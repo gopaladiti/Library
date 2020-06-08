@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: library
+  datasource:
+    url: jdbc:mysql://localhost:3306/libdb
+    username: root
+    password: admin123
+server:
+  port: 9090
+  context-path: /library

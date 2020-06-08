@@ -1,0 +1,16 @@
+.get-button {
+  position: fixed;
+  top: 50%;
+  left: 40%;
+  height: 70px;
+  width: 400px;
+  font-size: 22px;
+  font-family: Arial;
+  color: #FFFFFF;
+  background: #000000;
+}
+.booklist {
+  position: fixed;
+  top: 50%;
+  left: 40%;
+}
