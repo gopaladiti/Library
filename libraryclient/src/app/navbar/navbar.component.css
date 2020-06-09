@@ -1,0 +1,15 @@
+.home {
+  flex: 1;
+}
+.title {
+  text-align: center;
+  justify-content: flex-center;
+  flex: 2;
+  font-size: 40px;
+}
+.nav {
+  justify-content: flex-end;
+  flex: 1 ;
+  padding-right: 30px;
+  font-size: 20px;
+}

@@ -1,15 +1,15 @@
 package com.example.library.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+@AllArgsConstructor(onConstructor_ = @JsonCreator)
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -17,17 +17,28 @@ import java.time.LocalDateTime;
 public class BorrowedBooks {
 
     @Id
+    @GeneratedValue
     private int id;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="bookId", referencedColumnName = "id")
+    @JsonProperty("bookId")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id")
     private Books book;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="userId", referencedColumnName = "userId")
+    @JsonProperty("userId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_Id")
     private UserDetails user;
 
+    @JsonProperty("borrowedDate")
+    @Column(name="borrowed_Date")
     private LocalDateTime borrowedDate;
+
+    @JsonProperty("dueDate")
+    @Column(name="due_Date")
     private LocalDateTime dueDate;
+
+    @JsonProperty("returnDate")
+    @Column(name="return_Date")
     private LocalDateTime returnDate;
 }
