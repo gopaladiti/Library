@@ -1,10 +1,23 @@
-<div [hidden]="isBooksPresent">
-  <button class="btn btn-primary get-button" (click)="getAllBooks()">Browse Books</button>
+<div>
+{{ books }}
+  <mat-grid-list cols="4">
+    <ol>
+      <li *ngFor="let book of books">
+      <mat-card>
+      <mat-card-title>{{ book }}</mat-card-title>
+      <mat-card-content>fictional Book</mat-card-content>
+      <mat-card-actions>
+        <mat-checkbox>Select</mat-checkbox>
+      </mat-card-actions>
+    </mat-card>
+      </li>
+    </ol>
+  </mat-grid-list>
 </div>
-<div class="booklist">
+<!--<div class="booklist">
   <ol>
     <li *ngFor="let book of books">
       {{ book }}
     </li>
   </ol>
-</div>
+</div>-->

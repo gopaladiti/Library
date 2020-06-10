@@ -1,7 +1,7 @@
 <navbar></navbar>
-<div><h1></h1></div>
-<div>
-  <books></books>
+<div [hidden]="isBooksPresent">
+  <button md-button-raised class="get-button" (click)="getAllBooks()">Browse Books</button>
 </div>
+<router-outlet></router-outlet>
 
 
