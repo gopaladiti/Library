@@ -5,7 +5,7 @@
         <mat-card-title>{{ book.title }}</mat-card-title>
         <mat-card-content>Author: {{ book.author }}</mat-card-content>
         <mat-card-actions>
-          <mat-checkbox id="{{ book.id }}" (change)="selectBook($event)">Select</mat-checkbox>
+          <mat-checkbox id="{{ book.id }}" (change)="selectBook($event)" disabled="{{ book.available == 1 }}">Select</mat-checkbox>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
