@@ -8,19 +8,26 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksComponent,
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BorrowedBooksComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +39,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatButtonModule,
     MatGridListModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    MatListModule,
+    MatTooltipModule,
+    MatTableModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

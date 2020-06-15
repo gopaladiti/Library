@@ -5,6 +5,7 @@ import com.example.library.model.BorrowedBooks;
 import com.example.library.model.UserDetails;
 import com.example.library.service.BookService;
 import com.example.library.service.BorrowedBooksService;
+import com.example.library.service.UserDetailsService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,6 +32,9 @@ public class BookControllerTests {
 
     @Mock
     private BorrowedBooksService borrowedBooksService;
+
+    @Mock
+    private UserDetailsService userDetailsService;
 
     @InjectMocks
     private BookController bookController;
@@ -74,7 +76,6 @@ public class BookControllerTests {
                 .dueDate(LocalDateTime.now().plusDays(14)).returnDate(null).build();
         bbook2 = BorrowedBooks.builder().book(book2).user(user1).borrowedDate(LocalDateTime.now())
                 .dueDate(LocalDateTime.now().plusDays(14)).returnDate(null).build();
-
     }
 
     @Test
@@ -82,14 +83,14 @@ public class BookControllerTests {
         List<Books> listOfBooks =  Arrays.asList(book1, book2, book3, book4);
         Mockito.when(bookService.findAll()).thenReturn(listOfBooks);
         assertEquals(bookController.getBooks().size(), 4);
-        assertEquals(bookController.getBooks().get(0), "Book1");
+        assertEquals(bookController.getBooks().get(0).getTitle(), "Book1");
     }
 
     @Test
     public void getBorrowedBooksTest() {
         List<BorrowedBooks> listOfBooks =  Arrays.asList(bbook1, bbook2);
-        Mockito.when(borrowedBooksService.findAll()).thenReturn(listOfBooks);
+        Mockito.when(borrowedBooksService.getBorrowedBooksByUser(1)).thenReturn(listOfBooks);
         assertEquals(bookController.getBooksBorrowedByUser(1).size(), 2);
-        assertEquals(bookController.getBooksBorrowedByUser(1).get(0), "Book1");
+        assertEquals(bookController.getBooksBorrowedByUser(1).get(0).getBook().getTitle(), "Book1");
     }
 }

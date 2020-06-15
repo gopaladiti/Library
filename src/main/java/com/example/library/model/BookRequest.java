@@ -2,15 +2,24 @@ package com.example.library.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class BookRequest {
 
-    int userId;
-    List<Books> listOfBooks;
+    private Books book;
+
+    private UserDetails user;
+
+    private LocalDateTime borrowedDate;
+
+    private LocalDateTime dueDate;
+
+    private LocalDateTime returnDate;
 }

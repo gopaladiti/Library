@@ -2,9 +2,7 @@ package com.example.library.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @AllArgsConstructor
@@ -12,12 +10,14 @@ import javax.persistence.Table;
 @Builder
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name="books")
 public class Books {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
     private String title;
     private String author;
     private String description;

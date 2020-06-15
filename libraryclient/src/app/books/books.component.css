@@ -1,6 +1,36 @@
-
-.booklist {
-  position: fixed;
-  top: 50%;
-  left: 40%;
+mat-card {
+  width: 200px;
+  height: 250px;
 }
+mat-card-actions {
+  margin-bottom: 0px;
+}
+.rent-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 50px;
+  margin-bottom: 100px;
+  width: 150px;
+  height: 50px;
+  color: #FFFFFF;
+  background: #007bff;
+  text-align: center;
+  font-size: 18px;
+  font-family: Arial;
+}
+.my-books-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 250px;
+  margin-bottom: 100px;
+  width: 150px;
+  height: 50px;
+  color: #FFFFFF;
+  background: #007bff;
+  text-align: center;
+  font-size: 18px;
+  font-family: Arial;
+}
+

@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -10,19 +9,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
 
   title = 'libraryclient';
-  books: any;
-  isBooksPresent: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor() {
   }
 
-  getAllBooks() {
-      this.http.get("http://localhost:9090/books")
-          .subscribe(response => {
-            console.log(response);
-            this.books = response;
-            this.isBooksPresent = true;
-          });
-      this.router.navigate(['/books'], { queryParams: { books: this.books} });
+  ngOnInit(): void {
   }
+
 }

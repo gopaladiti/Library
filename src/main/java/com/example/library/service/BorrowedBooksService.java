@@ -17,4 +17,19 @@ public class BorrowedBooksService {
         return (List< BorrowedBooks>)borrowedBooksRepository.findAll();
     }
 
+    public BorrowedBooks save(BorrowedBooks requestBook) {
+        return borrowedBooksRepository.save(requestBook);
+    }
+
+    public List<BorrowedBooks> getBorrowedBooksByUser(Integer userId) {
+        return borrowedBooksRepository.findByUserUserId(userId);
+    }
+
+    public List<BorrowedBooks> getBorrowedBooksByBookId(Integer bookId) {
+        return borrowedBooksRepository.findByBookId(bookId);
+    }
+
+    public void deleteBook(Integer id) {
+        borrowedBooksRepository.deleteById(id);
+    }
 }
