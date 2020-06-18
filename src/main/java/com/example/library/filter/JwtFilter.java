@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@Component
-public class JwtFilter /*extends OncePerRequestFilter*/ {
+@Component
+public class JwtFilter extends OncePerRequestFilter {
 
-    /*@Autowired
+    @Autowired
     private JwtUtil jwtUtil;
 
     @Autowired
@@ -31,12 +31,11 @@ public class JwtFilter /*extends OncePerRequestFilter*/ {
         String authorizationHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
-        System.out.println("Inside filter!!!");
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
             username = jwtUtil.extractUsername(token);
         }
-        if(username != null && SecurityContextHolder.getContext().getAuthentication() != null) {
+        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = libraryUserDetailsService.loadUserByUsername(username);
             if(jwtUtil.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
@@ -46,10 +45,7 @@ public class JwtFilter /*extends OncePerRequestFilter*/ {
                         new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
-            filterChain.doFilter(request, response);
         }
-
-        //System.out.println(jwtUtil.generateToken("patrick"));
-        System.out.println("Moving out of filter!!!");
-    }*/
+        filterChain.doFilter(request, response);
+    }
 }
