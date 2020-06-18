@@ -2,10 +2,10 @@ package com.example.library.controller;
 
 import com.example.library.model.Books;
 import com.example.library.model.BorrowedBooks;
-import com.example.library.model.UserDetails;
+import com.example.library.model.UserInfo;
 import com.example.library.service.BookService;
 import com.example.library.service.BorrowedBooksService;
-import com.example.library.service.UserDetailsService;
+import com.example.library.service.UserInfoService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class BookControllerTests {
     private BorrowedBooksService borrowedBooksService;
 
     @Mock
-    private UserDetailsService userDetailsService;
+    private UserInfoService userInfoService;
 
     @InjectMocks
     private BookController bookController;
@@ -51,7 +51,7 @@ public class BookControllerTests {
 
     private static BorrowedBooks bbook2;
 
-    private static UserDetails user1;
+    private static UserInfo user1;
 
     @BeforeEach
     public void setup() {
@@ -69,7 +69,7 @@ public class BookControllerTests {
         book4 = Books.builder().id(4).title("Book4").author("author4").description("non-fiction")
                 .available(1).build();
 
-        user1 = UserDetails.builder().userId(1).username("user1").password("pswd")
+        user1 = UserInfo.builder().userId(1).username("user1").password("pswd")
                 .emailId("user1@domain.com").build();
 
         bbook1 = BorrowedBooks.builder().book(book1).user(user1).borrowedDate(LocalDateTime.now())

@@ -30,7 +30,7 @@ public class BorrowedBooks {
     @ManyToOne
     @JoinColumn(name="user_Id")
     @NotNull
-    private UserDetails user;
+    private UserInfo user;
 
     @Column(name="borrowed_Date")
     private LocalDateTime borrowedDate;
@@ -43,7 +43,7 @@ public class BorrowedBooks {
 
     @JsonCreator
     public BorrowedBooks(@JsonProperty("book_Id") Books book,
-                         @JsonProperty("user_Id") UserDetails user,
+                         @JsonProperty("user_Id") UserInfo user,
                          @JsonProperty("borrowed_Date") LocalDateTime borrowedDate,
                          @JsonProperty("due_Date") LocalDateTime dueDate,
                          @JsonProperty("return_Date") LocalDateTime returnDate) {

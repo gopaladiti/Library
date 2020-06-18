@@ -3,7 +3,7 @@ package com.example.library.controller;
 import com.example.library.model.*;
 import com.example.library.service.BookService;
 import com.example.library.service.BorrowedBooksService;
-import com.example.library.service.UserDetailsService;
+import com.example.library.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/books")
-@CrossOrigin(origins = "http://localhost:4200")
+/*@CrossOrigin(origins = "*")*/
 public class BookController {
 
     private BookService bookService;
 
     private BorrowedBooksService borrowedBooksService;
 
-    private UserDetailsService userDetailsService;
+    private UserInfoService userInfoService;
 
     @Autowired
     public BookController(BookService bookService, BorrowedBooksService borrowedBooksService,
-                          UserDetailsService userDetailsService) {
+                          UserInfoService userInfoService) {
         this.bookService = bookService;
         this.borrowedBooksService = borrowedBooksService;
-        this.userDetailsService = userDetailsService;
+        this.userInfoService = userInfoService;
     }
 
     @GetMapping
@@ -45,7 +45,7 @@ public class BookController {
 
     @PostMapping("/user")
     public List<BorrowedBooks> borrowBooks(@RequestBody RentBook data) {
-        UserDetails user = userDetailsService.getUserByUserId(data.getUserId());
+        UserInfo user = userInfoService.getUserByUserId(data.getUserId());
         List<Books> listOfBooks = new ArrayList<>();
         for(int bookId: data.getListOfBooks()) {
             bookService.findByBookId(bookId).ifPresent(listOfBooks::add);

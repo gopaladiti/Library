@@ -11,6 +11,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FormsModule }   from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +23,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
 import { HomeComponent } from './home/home.component';
 
+import { BooksService } from './books.service';
+import { LoginService } from './login.service';
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +34,8 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     PageNotFoundComponent,
     BorrowedBooksComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +50,15 @@ import { HomeComponent } from './home/home.component';
     RouterModule,
     MatListModule,
     MatTooltipModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    FormsModule
   ],
-  providers: [ ],
+  providers: [
+    BooksService,
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

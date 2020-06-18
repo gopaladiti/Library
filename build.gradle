@@ -16,12 +16,20 @@ configurations {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
+	maven {
+		url "https://mvnrepository.com/artifact"
+	}
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	implementation('io.jsonwebtoken:jjwt:0.9.1')
+	//compileOnly 'io.jsonwebtoken:jjwt'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'

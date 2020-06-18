@@ -15,7 +15,7 @@ public class BookRequest {
 
     private Books book;
 
-    private UserDetails user;
+    private UserInfo user;
 
     private LocalDateTime borrowedDate;
 
