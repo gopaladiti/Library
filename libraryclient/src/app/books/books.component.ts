@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BooksService } from '../books.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'books',
@@ -15,17 +16,23 @@ export class BooksComponent implements OnInit {
   booksPresent: boolean = false;
   selectedBooks: number[] = [];
   requestBook: any;
+  token: string;
+  headers: any;
 
   constructor(private http: HttpClient, private router: Router,
-  private booksService: BooksService) {
+  private booksService: BooksService, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
-    this.getAllBooks();
+    this.loginService.sharedToken.subscribe(data => this.token = data);
+    console.log(this.token);
+    this.headers = this.loginService.getHeaders(this.token);
+    console.log(this.headers);
+    this.getAllBooks(this.headers);
   }
 
-  getAllBooks() {
-    return this.http.get("http://localhost:9090/books")
+  getAllBooks(headers) {
+    return this.http.get("http://localhost:9090/books", { headers, responseType: 'json' })
         .subscribe(response => {
           this.books = response;
           this.booksPresent = true;
@@ -53,7 +60,8 @@ export class BooksComponent implements OnInit {
       userId: userId,
       listOfBooks: this.selectedBooks
     };
-    this.http.post("http://localhost:9090/books/user", this.requestBook)
+    this.http.post<any>("http://localhost:9090/books/user", this.requestBook,
+    { headers: this.headers, responseType: 'json' })
       .subscribe(response => {
          this.rentedBooks = response;
          this.router.navigate([url, userId]);

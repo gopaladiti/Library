@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { BooksService } from '../books.service';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     "password": this.password
   };
 
-  constructor(private loginService: LoginService, private booksService: BooksService) { }
+  constructor(private loginService: LoginService, private booksService: BooksService,
+  private router: Router) { }
 
   ngOnInit(): void {
     this.booksService.updatedBooksPresentValue(true);
@@ -36,12 +38,9 @@ export class LoginComponent implements OnInit {
         .subscribe( data => {
           console.log(data);
           this.token = data;
-          this.welcome();
+          this.loginService.updateTokenValue(data);
+          this.router.navigateByUrl('home');
     });
-  }
-
-  welcome() {
-    this.loginService.welcome(this.token).subscribe(value => this.response = value);
   }
 
 }

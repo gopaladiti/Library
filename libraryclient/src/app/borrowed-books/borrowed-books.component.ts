@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../books.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-borrowed-books',
@@ -14,19 +15,27 @@ export class BorrowedBooksComponent implements OnInit {
   userId: number;
   displayedColumns: string[] = ['select', 'title', 'borrowedDate', 'dueDate'];
   selectedBooks: number[] = [];
+  token: string;
+  headers: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private booksService: BooksService) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute,
+  private booksService: BooksService, private loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.loginService.sharedToken.subscribe(data => this.token = data);
+    console.log(this.token);
+    this.headers = this.loginService.getHeaders(this.token);
+    console.log(this.headers);
     this.route.paramMap.subscribe(param => {
       this.userId = +param.get('userId');
     });
-    this.getBooksRentedByUser();
+    this.getBooksRentedByUser(this.headers);
     this.booksService.updatedBooksPresentValue(true);
   }
 
-  getBooksRentedByUser() {
-    this.http.get('http://localhost:9090/books/user/'+this.userId).subscribe(response => {
+  getBooksRentedByUser(headers) {
+    this.http.get('http://localhost:9090/books/user/'+this.userId, { headers, responseType: 'json'})
+    .subscribe(response => {
       this.rentedBooks = response;
     });
   }
@@ -43,8 +52,13 @@ export class BorrowedBooksComponent implements OnInit {
     }
 
   returnBooks() {
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer '+this.token
+      })
+    };
     this.selectedBooks.forEach(bookId => {
-      this.http.delete('http://localhost:9090/books/user/'+this.userId+'/'+bookId)
+      this.http.delete<any>('http://localhost:9090/books/user/'+this.userId+'/'+bookId, options)
       .subscribe(response => {
         this.rentedBooks = response;
         this.selectedBooks = [];
