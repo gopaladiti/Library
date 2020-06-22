@@ -7,14 +7,15 @@
         <mat-card-actions>
           <mat-checkbox id="{{ book.id }}" (change)="selectBook($event)" disabled="{{ book.available == 1 }}">Select</mat-checkbox>
         </mat-card-actions>
+        <span class="unavailable" *ngIf="isUnavailable(book)">Rented Out!</span>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
 <div *ngIf="books">
-  <button md-button-raised class="my-books-button" (click)="getMyBooks('books/user',1)">My Books</button>
+  <button md-button-raised class="my-books-button" (click)="getMyBooks('books/user')">My Books</button>
 </div>
 <div *ngIf="books">
-  <button md-button-raised class="rent-button" (click)="rentBooks('books/user',1)">Rent Books</button>
+  <button md-button-raised class="rent-button" (click)="rentBooks('books/user')">Rent Books</button>
 </div>
 <router-outlet></router-outlet>

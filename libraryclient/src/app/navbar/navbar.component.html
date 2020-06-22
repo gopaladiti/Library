@@ -1,8 +1,15 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <a class="home" routerLink="home">Home</a>
-    <span class="title">Books Library</span>
-    <a class="nav" routerLink="login">Login</a>
+    <div class="home" *ngIf="!isHomePage()"><a routerLink="home">Home</a></div>
+    <div class="home" *ngIf="isHomePage()"></div>
+    <div class="title"><span>Books Library</span></div>
+    <div class="nav">
+      <a *ngIf="isLoggedIn()" class="user" routerLink="account/{{ username }}">
+      {{ username }}
+    </a>
+      <a *ngIf="!isLoggedIn()" routerLink="login">Login</a>
+      <a *ngIf="isLoggedIn()" routerLink="home" (click)="logout()">Logout</a>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->

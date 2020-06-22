@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BooksService } from '../books.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'home',
@@ -9,16 +10,21 @@ import { BooksService } from '../books.service';
 })
 export class HomeComponent implements OnInit {
 
-  isBooksPresent: boolean;
+  //isBooksPresent: boolean;
 
-  constructor(private router: Router, private booksService: BooksService) { }
+  constructor(private router: Router, private location: Location) { }
 
   ngOnInit(): void {
-    this.booksService.updatedBooksPresentValue(false);
-    this.booksService.sharedBooks.subscribe(booksPresent => this.isBooksPresent = booksPresent);
+    //this.booksService.updatedBooksPresentValue(false);
+    //this.booksService.sharedBooks.subscribe(booksPresent => this.isBooksPresent = booksPresent);
+    //localStorage.setItem('homePage', 'true');
   }
 
-  goToBooks(url) {
-    this.router.navigateByUrl(url);
+  isHomePage() {
+     return (this.location.path().endsWith('home'));
+  }
+
+  goToBooks() {
+    this.router.navigateByUrl("books");
   }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'navbar',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+
+  constructor(private loginService: LoginService, private location: Location,
+  private router: Router) { }
 
   ngOnInit(): void {
+    this.loginService.sharedUser.subscribe(data => {
+      if(data !== null)
+        this.username = data.username;
+    });
+    //this.username = localStorage.getItem('username');
+  }
+
+  isHomePage() {
+    return (this.location.path().endsWith('home'));
+  }
+
+  logout() {
+    this.loginService.updateUserValue(null);
+    //this.loginService.updateTokenValue(null);
+    localStorage.clear();
+    this.router.navigateByUrl('home');
+  }
+
+  isLoggedIn() {
+    return this.loginService.isLoggedIn();
   }
 
 }

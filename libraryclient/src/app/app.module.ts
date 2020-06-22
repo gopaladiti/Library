@@ -25,7 +25,9 @@ import { HomeComponent } from './home/home.component';
 
 import { BooksService } from './books.service';
 import { LoginService } from './login.service';
+import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { LoginComponent } from './login/login.component';
     PageNotFoundComponent,
     BorrowedBooksComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     BooksService,
-    LoginService
+    LoginService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

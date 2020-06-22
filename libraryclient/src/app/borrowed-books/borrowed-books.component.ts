@@ -22,7 +22,8 @@ export class BorrowedBooksComponent implements OnInit {
   private booksService: BooksService, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.loginService.sharedToken.subscribe(data => this.token = data);
+    //this.loginService.sharedToken.subscribe(data => this.token = data);
+    this.token = localStorage.getItem('token');
     console.log(this.token);
     this.headers = this.loginService.getHeaders(this.token);
     console.log(this.headers);
@@ -30,7 +31,7 @@ export class BorrowedBooksComponent implements OnInit {
       this.userId = +param.get('userId');
     });
     this.getBooksRentedByUser(this.headers);
-    this.booksService.updatedBooksPresentValue(true);
+    //this.booksService.updatedBooksPresentValue(true);
   }
 
   getBooksRentedByUser(headers) {

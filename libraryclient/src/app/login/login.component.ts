@@ -26,20 +26,32 @@ export class LoginComponent implements OnInit {
   private router: Router) { }
 
   ngOnInit(): void {
-    this.booksService.updatedBooksPresentValue(true);
+    //this.loginService.sharedToken.subscribe(value => this.token = value);
   }
 
   login() {
-    console.log(this.username);
-    console.log(this.password);
+    //console.log(this.username);
+    //console.log(this.password);
     this.authRequest.username = this.username;
     this.authRequest.password = this.password;
     this.loginService.generateToken(this.authRequest)
         .subscribe( data => {
           console.log(data);
           this.token = data;
-          this.loginService.updateTokenValue(data);
-          this.router.navigateByUrl('home');
+          localStorage.setItem("token", data);
+          //this.loginService.updateTokenValue(data);
+          this.getUserInfo(this.token);
+    });
+  }
+
+  getUserInfo(token) {
+    this.loginService.getUserInfo(this.token, this.username)
+    .subscribe(response => {
+      console.log(response);
+      //localStorage.setItem('username', response.username);
+      //localStorage.setItem('userId', response.userId);
+      this.loginService.updateUserValue(response);
+      this.router.navigateByUrl('home');
     });
   }
 

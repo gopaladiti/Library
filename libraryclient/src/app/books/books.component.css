@@ -1,6 +1,6 @@
 mat-card {
   width: 200px;
-  height: 250px;
+  height: 280px;
 }
 mat-card-actions {
   margin-bottom: 0px;
@@ -16,7 +16,7 @@ mat-card-actions {
   color: #FFFFFF;
   background: #007bff;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Arial;
 }
 .my-books-button {
@@ -30,7 +30,12 @@ mat-card-actions {
   color: #FFFFFF;
   background: #007bff;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Arial;
+}
+.unavailable {
+  font-size: 16px;
+  font-family: Arial;
+  color: #FF0000;
 }
 

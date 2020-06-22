@@ -1,11 +1,14 @@
 package com.example.library.controller;
 
 import com.example.library.model.AuthRequest;
+import com.example.library.model.UserInfo;
+import com.example.library.service.UserInfoService;
 import com.example.library.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +18,9 @@ public class LoginController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -36,5 +42,10 @@ public class LoginController {
         }
         String jwt = jwtUtil.generateToken(username);
         return jwt;
+    }
+
+    @GetMapping("/user/{username}")
+    public UserInfo getUserInfo(@PathVariable String username) {
+        return userInfoService.getUserByUserName(username);
     }
 }

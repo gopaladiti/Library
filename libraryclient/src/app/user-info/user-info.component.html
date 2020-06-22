@@ -1,0 +1,28 @@
+<form class="example-form">
+
+  <mat-form-field class="example-full-width">
+    <mat-label>UserId</mat-label>
+    <input disabled="true" matInput value="{{user.userId}}">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Username</mat-label>
+      <input disabled="true" matInput value="{{user.username}}">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input type="password" disabled="true" matInput value="{{user.password}}">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>EmailId</mat-label>
+    <input disabled="true" matInput value="{{user.emailId}}">
+  </mat-form-field>
+
+</form>
+<div>
+  <button *ngIf="!isEditView()" md-button-raised class="edit-button" (click)="editDetails()">Edit Details</button>
+  <button *ngIf="isEditView()" md-button-raised class="edit-button" (click)="save()">Save</button>
+  <button *ngIf="isEditView()" md-button-raised class="cancel-button" (click)="cancel()">Cancel</button>
+</div>

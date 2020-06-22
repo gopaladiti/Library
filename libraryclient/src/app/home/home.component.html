@@ -1,4 +1,6 @@
-<div [hidden]="isBooksPresent">
-  <button md-button-raised class="get-button" (click)="goToBooks('books')">Browse Books</button>
+<!--<div [hidden]="isBooksPresent">-->
+<div *ngIf="isHomePage()">
+  <!--<button md-button-raised class="get-button" (click)="goToBooks('books')">Browse Books</button>-->
+  <button md-button-raised class="get-button" (click)="goToBooks()">Browse Books</button>
 </div>
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->

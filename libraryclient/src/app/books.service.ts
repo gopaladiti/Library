@@ -6,13 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BooksService {
 
-  private booksPresent = new BehaviorSubject(false);
-  sharedBooks = this.booksPresent.asObservable();
+  //private booksPresent = new BehaviorSubject(false);
+  //sharedBooks = this.booksPresent.asObservable();
 
   constructor() { }
 
-  updatedBooksPresentValue(booksPresent: boolean) {
+  /*updatedBooksPresentValue(booksPresent: boolean) {
     this.booksPresent.next(booksPresent);
-  }
+  }*/
 
 }
